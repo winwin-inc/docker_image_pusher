@@ -1,6 +1,10 @@
-nginx
-busybox
-apache/shardingsphere-proxy:5.1.2
-quay.io/coreos/etcd:v3.5.5
-minio/minio:RELEASE.2023-03-20T20-16-18Z
-milvusdb/milvus:v2.4.9
+ffdfgdfg/nps:v0.26.10
+getmeili/meilisearch:v1.10.0
+grafana/grafana:10.1.5
+graphiteapp/graphite-statsd:1.1.10-5
+postgres:14.1
+nginx:1.27.1-alpine
+busybox:1.36.1
+vesoft/nebula-graph-studio:v3.2.2
+yangzhuangqiu/datax:admin-2.1.2
+zilliz/attu:v2.4.7
