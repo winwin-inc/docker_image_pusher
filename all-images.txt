@@ -21,3 +21,6 @@ goharbor/redis-photon:v2.9.0
 goharbor/trivy-adapter-photon:v2.9.0
 provectuslabs/kafka-ui:v0.7.2
 zookeeper
+apache/apisix:3.6.0-debian
+apache/apisix-ingress-controller:1.6.0
+bitnami/etcd:3.5.7-debian-11-r14
