@@ -1,7 +1,1 @@
-python:3.11-slim
-python:3.10-slim
-node:20-slim
-eclipse-temurin:8-jre-alpine
-eclipse-temurin:17-jre-alpine
-ubuntu:22.04
-
+langfuse/langfuse
