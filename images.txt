@@ -1,1 +1,1 @@
-langfuse/langfuse
+langfuse/langfuse:2
