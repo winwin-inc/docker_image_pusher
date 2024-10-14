@@ -30,3 +30,4 @@ vesoft/nebula-graph-studio:v3.2.2
 yangzhuangqiu/datax:admin-2.1.2
 zilliz/attu:v2.4.7
 zookeeper
+langfuse/langfuse:2
