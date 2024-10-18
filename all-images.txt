@@ -31,3 +31,6 @@ yangzhuangqiu/datax:admin-2.1.2
 zilliz/attu:v2.4.7
 zookeeper
 langfuse/langfuse:2
+supersonicbi/supersonic
+mysql:8.0
+chromadb/chroma:0.5.3
