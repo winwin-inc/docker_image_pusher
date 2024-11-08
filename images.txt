@@ -1,1 +1,1 @@
-wheelybird/ldap-user-manager:v1.11
+nocodb/nocodb
