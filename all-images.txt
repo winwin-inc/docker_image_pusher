@@ -36,3 +36,4 @@ mysql:8.0
 chromadb/chroma:0.5.3
 wheelybird/ldap-user-manager:v1.11
 nocodb/nocodb
+nikolaik/python-nodejs:python3.10-nodejs20-slim
