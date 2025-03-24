@@ -7,7 +7,6 @@ busybox:1.36.1
 chromadb/chroma:0.5.3
 eclipse-temurin:17-jre-alpine
 eclipse-temurin:8-jre-alpine
-ffdfgdfg/nps:v0.26.10
 getmeili/meilisearch:v1.10.0
 goharbor/harbor-core:v2.9.0
 goharbor/harbor-db:v2.9.0
