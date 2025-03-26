@@ -1,3 +1,1 @@
-apache/apisix:3.11.0-debian
-apache/apisix-ingress-controller:1.8.0
-bitnami/etcd:3.5.10-debian-11-r2
+jaegertracing/jaeger:2.4.0
