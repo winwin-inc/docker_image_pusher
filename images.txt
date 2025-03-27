@@ -1,2 +1,1 @@
-yangzhuangqiu/datax:admin-2.1.2 # name=datax-admin 
-yangzhuangqiu/datax:executor-2.1.2 # name=datax-executor
+grafana/grafana:11.6.0
