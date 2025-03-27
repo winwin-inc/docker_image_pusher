@@ -1,1 +1,2 @@
-jaegertracing/jaeger:2.4.0
+yangzhuangqiu/datax:admin-2.1.2 # name=datax-admin 
+yangzhuangqiu/datax:executor-2.1.2 # name=datax-executor
