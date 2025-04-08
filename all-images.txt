@@ -43,3 +43,4 @@ bitnami/etcd:3.5.10-debian-11-r2
 jaegertracing/jaeger:2.4.0
 yangzhuangqiu/datax:executor-2.1.2 # name=datax
 grafana/grafana:11.6.0
+zenika/alpine-chrome:with-node
