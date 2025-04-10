@@ -50,3 +50,4 @@ ghcr.io/canner/wren-engine:0.14.8
 ghcr.io/canner/wren-engine-ibis:0.14.8
 qdrant/qdrant:v1.11.0
 ghcr.io/canner/wren-bootstrap:0.1.5
+prefecthq/prefect:3.2.14-python3.11

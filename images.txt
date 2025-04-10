@@ -1,1 +1,1 @@
-prefecthq/prefect:3.2.14-python3.11
+bitnami/postgresql:15.4.0-debian-11-r45
