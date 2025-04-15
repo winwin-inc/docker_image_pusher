@@ -62,4 +62,6 @@ jobs:
       run: uv sync
 
     - name: Build and push image Aliyun
-      run: uv run cli.py push
+      run: |
+        docker login -u $ALIYUN_REGISTRY_USER -p $ALIYUN_REGISTRY_PASSWORD $ALIYUN_REGISTRY
+        uv run cli.py push
