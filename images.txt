@@ -1,1 +1,0 @@
-bitnami/postgresql:15.4.0-debian-11-r45
