@@ -106,7 +106,7 @@ def push_image(image, tag, dry_run):
     full_name = f"{env['ALIYUN_REGISTRY']}/{env['ALIYUN_NAME_SPACE']}:{tag}"
     # TODO: 支持 platform 参数
     commands = f"""
-    docker pull {image['name']} {full_name}
+    docker pull {image['name']}
     docker tag {image['name']} {full_name}
     docker push {full_name}
     docker rmi {image['name']}
