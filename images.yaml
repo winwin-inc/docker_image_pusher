@@ -52,3 +52,4 @@
 - name: zenika/alpine-chrome:with-node
 - name: zilliz/attu:v2.4.7
 - name: zookeeper
+- name: mcr.microsoft.com/devcontainers/javascript-node:1-18-bullseye
