@@ -55,3 +55,4 @@
 - name: mcr.microsoft.com/devcontainers/javascript-node:1-18-bullseye
 - name: docker.io/dagster/dagster-celery-k8s:1.10.10
 - name: docker.io/bitnami/minideb:stretch
+- name: maven:3.9-eclipse-temurin-17-alpine   
