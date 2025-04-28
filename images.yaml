@@ -10,6 +10,7 @@
 - name: bitnami/valkey:8.0.2-debian-12-r2
 - name: bitnami/clickhouse:25.2.1-debian-12-r0
 - name: bitnami/minio:2024.12.18-debian-12-r1
+- name: bitnami/zookeeper:3.9.3-debian-12-r8
 - name: busybox:1.36.1
 - name: chromadb/chroma:0.5.3
 - name: eclipse-temurin:17-jre-alpine
