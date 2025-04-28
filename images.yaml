@@ -64,3 +64,4 @@
 - name: maven:3.9-eclipse-temurin-17-alpine
 - name: ghcr.io/windmill-labs/windmill:1.482
 - name: ghcr.io/windmill-labs/windmill-lsp:1.482
+- name: victoriametrics/victoria-metrics:v1.113.0
