@@ -60,6 +60,7 @@
 - name: zookeeper
 - name: mcr.microsoft.com/devcontainers/javascript-node:1-18-bullseye
 - name: docker.io/dagster/dagster-celery-k8s:1.10.10
+- name: docker.io/dagster/dagster-celery-k8s:1.10.12
 - name: docker.io/bitnami/minideb:stretch
 - name: maven:3.9-eclipse-temurin-17-alpine
 - name: ghcr.io/windmill-labs/windmill:1.482
