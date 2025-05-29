@@ -56,6 +56,7 @@
 - name: yangzhuangqiu/datax:admin-2.1.2
 - name: yangzhuangqiu/datax:executor-2.1.2
 - name: zenika/alpine-chrome:with-node
+- name: zenika/alpine-chrome:124-with-node
 - name: zilliz/attu:v2.4.7
 - name: zookeeper
 - name: mcr.microsoft.com/devcontainers/javascript-node:1-18-bullseye
