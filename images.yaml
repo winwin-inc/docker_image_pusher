@@ -70,5 +70,7 @@
 - name: victoriametrics/victoria-metrics:v1.113.0
 - name: ghcr.io/astral-sh/uv:0.7.5
 - name: docker.getcollate.io/openmetadata/server:1.7.1
+  alias: openmetadata-server
 - name: docker.getcollate.io/openmetadata/ingestion:1.7.1
-- name: opensearchproject/opensearch:2.7.0  
+  alias: openmetadata-ingestion
+- name: opensearchproject/opensearch:2.7.0
