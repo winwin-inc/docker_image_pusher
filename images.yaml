@@ -18,11 +18,11 @@
 - name: eclipse-temurin:17-jre-alpine
 - name: eclipse-temurin:8-jre-alpine
 - name: getmeili/meilisearch:v1.10.0
-- name: ghcr.io/canner/wren-ai-service:0.19.0
+- name: ghcr.io/canner/wren-ai-service:0.23.2
 - name: ghcr.io/canner/wren-bootstrap:0.1.5
-- name: ghcr.io/canner/wren-engine-ibis:0.14.8
-- name: ghcr.io/canner/wren-engine:0.14.8
-- name: ghcr.io/canner/wren-ui:0.24.1
+- name: ghcr.io/canner/wren-engine-ibis:0.16.1
+- name: ghcr.io/canner/wren-engine:0.16.1
+- name: ghcr.io/canner/wren-ui:0.28.0
 - name: goharbor/harbor-core:v2.9.0
 - name: goharbor/harbor-db:v2.9.0
 - name: goharbor/harbor-jobservice:v2.9.0
