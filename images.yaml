@@ -78,3 +78,4 @@
 - name: docker.getcollate.io/openmetadata/ingestion:1.7.1
   alias: openmetadata-ingestion
 - name: opensearchproject/opensearch:2.7.0
+- name: fluent/fluent-bit:4.0.3
