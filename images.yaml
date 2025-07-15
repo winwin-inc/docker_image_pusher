@@ -79,3 +79,4 @@
   alias: openmetadata-ingestion
 - name: opensearchproject/opensearch:2.7.0
 - name: fluent/fluent-bit:4.0.3
+- name: dimitri/pgloader
