@@ -81,3 +81,4 @@
 - name: opensearchproject/opensearch:2.7.0
 - name: fluent/fluent-bit:4.0.3
 - name: dimitri/pgloader
+- name: jenkins/jenkins:2.504.3
