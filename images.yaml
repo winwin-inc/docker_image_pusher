@@ -27,6 +27,11 @@
 - name: ghcr.io/canner/wren-engine-ibis:0.16.1
 - name: ghcr.io/canner/wren-engine:0.16.1
 - name: ghcr.io/canner/wren-ui:0.28.0
+- name: ghcr.io/canner/wren-ai-service:0.24.3
+- name: ghcr.io/canner/wren-bootstrap:0.1.5
+- name: ghcr.io/canner/wren-engine-ibis:0.17.1
+- name: ghcr.io/canner/wren-engine:0.17.1
+- name: ghcr.io/canner/wren-ui:0.30.0
 - name: goharbor/harbor-core:v2.9.0
 - name: goharbor/harbor-db:v2.9.0
 - name: goharbor/harbor-jobservice:v2.9.0
