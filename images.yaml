@@ -58,7 +58,9 @@
 - name: provectuslabs/kafka-ui:v0.7.2
 - name: python:3.10-slim
 - name: python:3.11-slim
+- name: python:3.11-bookworm
 - name: qdrant/qdrant:v1.11.0
+  alias: 1.11.0-qdrant
 - name: quay.io/coreos/etcd:v3.5.5
 - name: supersonicbi/supersonic
 - name: ubuntu:22.04
