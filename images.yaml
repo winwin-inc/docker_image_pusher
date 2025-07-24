@@ -90,3 +90,4 @@
 - name: dimitri/pgloader
 - name: jenkins/jenkins:2.504.3
 - name: kiwigrid/k8s-sidecar:1.30.3
+- name: registry.k8s.io/git-sync/git-sync:v4.4.2
