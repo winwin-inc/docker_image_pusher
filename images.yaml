@@ -46,6 +46,7 @@
 - name: langfuse/langfuse:3
 - name: langfuse/langfuse-worker:3
 - name: milvusdb/milvus:v2.4.9
+- name: milvusdb/milvus:v2.6.0
 - name: minio/minio:RELEASE.2023-03-20T20-16-18Z
 - name: mysql:8.0
 - name: nginx:1.27.1-alpine
