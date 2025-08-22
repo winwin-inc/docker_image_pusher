@@ -80,9 +80,12 @@
 - name: maven:3.9-eclipse-temurin-17-alpine
 - name: ghcr.io/windmill-labs/windmill:1.482
 - name: ghcr.io/windmill-labs/windmill-lsp:1.482
-- name: victoriametrics/victoria-metrics:v1.113.0
 - name: victoriametrics/victoria-metrics:v1.123.0
+- name: victoriametrics/victoria-metrics:v1.124.0
+- name: victoriametrics/vmalert:v1.124.0
 - name: victoriametrics/victoria-logs:v1.28.0
+- name: victoriametrics/victoria-logs:v1.29.0
+- name: prom/alertmanager:v0.28.1
 - name: otel/opentelemetry-collector-contrib:0.131.0
 - name: ghcr.io/astral-sh/uv:0.7.5
 - name: docker.getcollate.io/openmetadata/server:1.7.1
