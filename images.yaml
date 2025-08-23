@@ -40,6 +40,7 @@
 - name: goharbor/trivy-adapter-photon:v2.9.0
 - name: grafana/grafana:10.1.5
 - name: grafana/grafana:11.6.0
+- name: grafana/grafana:12.0.2
 - name: graphiteapp/graphite-statsd:1.1.10-5
 - name: jaegertracing/jaeger:2.4.0
 - name: langfuse/langfuse:2
@@ -85,6 +86,7 @@
 - name: victoriametrics/vmalert:v1.124.0
 - name: victoriametrics/victoria-logs:v1.28.0
 - name: victoriametrics/victoria-logs:v1.29.0
+- name: victoriametrics/vmagent:v1.124.0
 - name: prom/alertmanager:v0.28.1
 - name: otel/opentelemetry-collector-contrib:0.131.0
 - name: ghcr.io/astral-sh/uv:0.7.5
