@@ -17,6 +17,7 @@
 - name: bitnami/mysql:8.0.33-debian-11-r0
 - name: bitnami/keycloak:26.2.1-debian-12-r0
 - name: bitnami/sealed-secrets-controller:v0.16.0
+- name: bitnami/openldap:2.6.10
 - name: busybox:1.36.1
 - name: chromadb/chroma:0.5.3
 - name: eclipse-temurin:17-jre-alpine
