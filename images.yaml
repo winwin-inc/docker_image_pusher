@@ -119,3 +119,4 @@
 - name: acryldata/datahub-mysql-setup
 - name: acryldata/datahub-postgres-setup
 - name: acryldata/datahub-upgrade
+- name: isindir/sops-secrets-operator:0.16.0
