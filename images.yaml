@@ -117,6 +117,6 @@
 - name: acryldata/datahub-mae-consumer
 - name: acryldata/datahub-mce-consumer
 - name: acryldata/datahub-mysql-setup
-- name: acryldata/datahub-postgres-setup
-- name: acryldata/datahub-upgrade
+- name: acryldata/datahub-postgres-setup:v1.2.0.1
+- name: acryldata/datahub-upgrade:v1.2.0.1
 - name: isindir/sops-secrets-operator:0.16.0
