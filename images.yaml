@@ -108,3 +108,14 @@
 - name: redis:8.2
 - name: louislam/uptime-kuma:1
 - name: docker.elastic.co/elasticsearch/elasticsearch:7.17.3
+- name: acryldata/datahub-actions
+- name: acryldata/datahub-elasticsearch-setup
+- name: acryldata/datahub-frontend-react
+- name: acryldata/datahub-gms
+- name: acryldata/datahub-ingestion
+- name: acryldata/datahub-kafka-setup
+- name: acryldata/datahub-mae-consumer
+- name: acryldata/datahub-mce-consumer
+- name: acryldata/datahub-mysql-setup
+- name: acryldata/datahub-postgres-setup
+- name: acryldata/datahub-upgrade
