@@ -1,6 +1,7 @@
 - name: alpine
 - name: apache/apisix-ingress-controller:1.6.0
 - name: apache/apisix-ingress-controller:1.8.0
+- name: apache/apisix:3.13.0-debian
 - name: apache/apisix:3.11.0-debian
 - name: apache/apisix:3.6.0-debian
 - name: apache/apisix:3.1.0-debian
@@ -120,3 +121,4 @@
 - name: acryldata/datahub-postgres-setup:v1.2.0.1
 - name: acryldata/datahub-upgrade:v1.2.0.1
 - name: isindir/sops-secrets-operator:0.16.0
+- name: eclipse-temurin:17-jdk-alpine
