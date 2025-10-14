@@ -85,15 +85,16 @@
 - name: ghcr.io/windmill-labs/windmill:1.482
 - name: ghcr.io/windmill-labs/windmill-lsp:1.482
 - name: victoriametrics/victoria-metrics:v1.123.0
-- name: victoriametrics/victoria-metrics:v1.124.0
-- name: victoriametrics/vmalert:v1.124.0
+- name: victoriametrics/victoria-metrics:v1.127.0
+- name: victoriametrics/vmalert:v1.127.0
 - name: victoriametrics/victoria-logs:v1.28.0
-- name: victoriametrics/victoria-logs:v1.29.0
-- name: victoriametrics/vmagent:v1.124.0
-- name: victoriametrics/victoria-traces:v0.2.0
+- name: victoriametrics/victoria-logs:v1.36.1
+- name: victoriametrics/vmagent:v1.127.0
+- name: victoriametrics/victoria-traces:v0.4.0
 - name: prom/alertmanager:v0.28.1
 - name: timonwong/prometheus-webhook-dingtalk:v2.1.0
 - name: otel/opentelemetry-collector-contrib:0.131.0
+- name: otel/opentelemetry-collector-contrib:0.134.0
 - name: ghcr.io/astral-sh/uv:0.7.5
 - name: docker.getcollate.io/openmetadata/server:1.7.1
   alias: openmetadata-server
