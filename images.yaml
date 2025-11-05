@@ -124,3 +124,4 @@
 - name: acryldata/datahub-upgrade:v1.2.0.1
 - name: isindir/sops-secrets-operator:0.16.0
 - name: eclipse-temurin:17-jdk-alpine
+- name: vespaengine/vespa:8.603.19
