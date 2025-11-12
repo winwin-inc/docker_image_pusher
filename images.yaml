@@ -47,8 +47,8 @@
 - name: graphiteapp/graphite-statsd:1.1.10-5
 - name: jaegertracing/jaeger:2.4.0
 - name: langfuse/langfuse:2
-- name: langfuse/langfuse:3
-- name: langfuse/langfuse-worker:3
+- name: langfuse/langfuse:3.111.0
+- name: langfuse/langfuse-worker:3.111.0
 - name: milvusdb/milvus:v2.4.9
 - name: milvusdb/milvus:v2.6.0
 - name: minio/minio:RELEASE.2023-03-20T20-16-18Z
