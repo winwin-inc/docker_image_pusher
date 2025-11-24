@@ -84,12 +84,10 @@
 - name: maven:3.9-eclipse-temurin-17-alpine
 - name: ghcr.io/windmill-labs/windmill:1.482
 - name: ghcr.io/windmill-labs/windmill-lsp:1.482
-- name: victoriametrics/victoria-metrics:v1.123.0
-- name: victoriametrics/victoria-metrics:v1.127.0
-- name: victoriametrics/vmalert:v1.127.0
-- name: victoriametrics/victoria-logs:v1.28.0
-- name: victoriametrics/victoria-logs:v1.36.1
-- name: victoriametrics/vmagent:v1.127.0
+- name: victoriametrics/victoria-metrics:v1.130.0
+- name: victoriametrics/vmalert:v1.130.0
+- name: victoriametrics/vmagent:v1.130.0
+- name: victoriametrics/victoria-logs:v1.38.0
 - name: victoriametrics/victoria-traces:v0.5.1
 - name: prom/alertmanager:v0.28.1
 - name: timonwong/prometheus-webhook-dingtalk:v2.1.0
