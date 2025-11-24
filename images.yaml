@@ -90,7 +90,7 @@
 - name: victoriametrics/victoria-logs:v1.28.0
 - name: victoriametrics/victoria-logs:v1.36.1
 - name: victoriametrics/vmagent:v1.127.0
-- name: victoriametrics/victoria-traces:v0.4.0
+- name: victoriametrics/victoria-traces:v0.5.1
 - name: prom/alertmanager:v0.28.1
 - name: timonwong/prometheus-webhook-dingtalk:v2.1.0
 - name: otel/opentelemetry-collector-contrib:0.131.0
