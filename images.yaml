@@ -125,3 +125,4 @@
 - name: isindir/sops-secrets-operator:0.16.0
 - name: eclipse-temurin:17-jdk-alpine
 - name: vespaengine/vespa:8.603.19
+- name: quay.io/keycloak/keycloak:26.4.5
