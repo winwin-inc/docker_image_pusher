@@ -132,3 +132,4 @@
 - name: ghcr.io/fluxcd/kustomize-controller:v1.7.3
 - name: ghcr.io/fluxcd/notification-controller:v1.7.5
 - name: ghcr.io/fluxcd/source-controller:v1.7.4
+- name: freeipa/freeipa-server:rocky-9-4.12.2
