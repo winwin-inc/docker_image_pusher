@@ -57,6 +57,7 @@
 - name: nikolaik/python-nodejs:python3.10-nodejs20-slim
 - name: nocodb/nocodb
 - name: node:20-slim
+- name: node:14-bullseye-slim
 - name: postgres:14.1
 - name: postgres:16
 - name: prefecthq/prefect:3.2.14-python3.11
