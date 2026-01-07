@@ -139,3 +139,4 @@
 - name: coredns/coredns:1.10.1           
 - name: eclipse-mosquitto:2.0.15-openssl 
 - name: caddy:2.8.4                      
+- name: ghcr.io/dayuanjiang/next-ai-draw-io:latest
