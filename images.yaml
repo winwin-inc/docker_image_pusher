@@ -138,5 +138,6 @@
 - name: gravitl/netmaker-ui:v1.2.0       
 - name: coredns/coredns:1.10.1           
 - name: eclipse-mosquitto:2.0.15-openssl 
-- name: caddy:2.8.4                      
+- name: caddy:2.8.4
+- name: caddy:2.10.2
 - name: ghcr.io/dayuanjiang/next-ai-draw-io:latest
