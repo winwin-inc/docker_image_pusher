@@ -141,3 +141,4 @@
 - name: caddy:2.8.4
 - name: caddy:2.10.2
 - name: ghcr.io/dayuanjiang/next-ai-draw-io:latest
+- name: apache/flink-kubernetes-operator:1.13.0
