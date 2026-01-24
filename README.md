@@ -78,3 +78,94 @@ xiaoyaliu/alist
 修改/.github/workflows/docker.yaml文件
 添加 schedule即可定时执行(此处cron使用UTC时区)
 ![](doc/定时执行.png)
+
+## 浏览器自动删除镜像 Tag
+
+当 Docker Registry API 返回 401 权限不足时,可以使用浏览器自动化方式删除阿里云镜像 tag。
+
+### 前提条件
+
+1. 安装 Playwright 依赖和浏览器:
+```bash
+uv sync
+uv run playwright install chromium
+```
+
+2. 配置环境变量 (创建 `.env` 文件):
+```bash
+ALIYUN_REGISTRY=registry.cn-beijing.aliyuncs.com
+ALIYUN_NAME_SPACE=your-namespace
+```
+
+### 使用步骤
+
+#### 1. 保存登录状态
+
+首次使用需要在浏览器中手动登录一次:
+```bash
+uv run cli.py delete-browser-login
+```
+
+命令会打开浏览器访问阿里云控制台,登录成功后在终端按回车键保存状态。
+
+登录状态会保存到 `aliyun_state.json` 文件中。
+
+#### 2. 删除单个 Tag
+
+```bash
+# 预览模式 (不实际删除)
+uv run cli.py delete-browser-single v1.0.0 --dry-run
+
+# 实际删除 (无头模式)
+uv run cli.py delete-browser-single v1.0.0
+
+# 显示浏览器窗口 (调试用)
+uv run cli.py delete-browser-single v1.0.0 --show-browser
+```
+
+#### 3. 批量删除 Tags
+
+```bash
+# 批量删除多个 tags (空格分隔)
+uv run cli.py delete-browser-batch "v1.0.0 v1.0.1 v1.0.2"
+
+# 增加操作延迟 (避免触发限制)
+uv run cli.py delete-browser-batch "v1.0.0 v1.0.1" --delay 3.0
+
+# 跳过确认提示
+uv run cli.py delete-browser-batch "v1.0.0 v1.0.1" --force
+```
+
+#### 4. 按正则表达式删除
+
+```bash
+# 删除所有匹配正则表达式的 tags
+uv run cli.py delete-browser-regex "^test-.*"
+
+# 限制删除数量
+uv run cli.py delete-browser-regex "^2025.*" --limit 50
+
+# 预览匹配的 tags
+uv run cli.py delete-browser-regex "^v1\\.0\\..*$" --dry-run
+```
+
+### 常见问题
+
+#### Q: 登录状态过期怎么办?
+重新运行 `uv run cli.py delete-browser-login` 保存新的登录状态。
+
+#### Q: 提示"未找到 tag 元素"?
+使用 `--show-browser` 参数查看浏览器操作过程,检查页面结构是否变化。
+
+#### Q: 删除操作很慢?
+这是正常的。为避免触发阿里云限制,默认每个操作间隔2秒。可以通过 `--delay` 参数调整。
+
+### 技术细节
+
+- 使用 Playwright 自动化浏览器操作
+- 支持无头模式和显示模式
+- 保守的元素定位策略,适应页面结构变化
+- 自动重试机制,提高稳定性
+- 支持批量删除和正则表达式匹配
+
+详细文档请参考: [浏览器删除方案.md](浏览器删除方案.md)

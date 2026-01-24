@@ -10,3 +10,22 @@ dependencies = [
     "pyyaml>=6.0.2",
     "typer>=0.15.2",
 ]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+    "playwright>=1.40.0",
+]
+
+[project.scripts]
+cli = "src.main:app"
+
+[tool.uv]
+package = true
