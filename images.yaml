@@ -143,3 +143,5 @@
 - name: caddy:2.10.2
 - name: ghcr.io/dayuanjiang/next-ai-draw-io:latest
 - name: apache/flink-kubernetes-operator:1.13.0
+- name: flink:1.20.3-scala_2.12-java11
+- name: maven:3.9-eclipse-temurin-11-alpine
