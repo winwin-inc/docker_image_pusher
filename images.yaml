@@ -23,6 +23,7 @@
 - name: bitnami/zookeeper:3.9.3-debian-12-r8
 - name: bitnami/mysql:8.0.33-debian-11-r0
 - name: bitnami/keycloak:26.2.1-debian-12-r0
+- name: keycloak/keycloak:26.6.0
 - name: bitnami/sealed-secrets-controller:v0.16.0
 - name: bitnami/openldap:2.6.10
 - name: busybox:1.28
