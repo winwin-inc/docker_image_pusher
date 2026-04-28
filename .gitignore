@@ -1,3 +1,12 @@
 .env
 .env*.local
 data/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+
+# Logs
+logs/

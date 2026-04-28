@@ -1,8 +1,12 @@
+from dotenv import load_dotenv
+from os import environ as env
+
+load_dotenv()
+
 from typer import Typer
 import httpx
 import re
 import base64
-from os import environ as env
 from urllib.parse import urlencode
 from prettytable import PrettyTable
 import yaml
