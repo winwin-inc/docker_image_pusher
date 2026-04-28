@@ -1,10 +1,8 @@
 - name: alpine
-- name: apache/apisix-ingress-controller:1.6.0
 - name: apache/apisix-ingress-controller:1.8.0
 - name: apache/apisix-ingress-controller:2.0.1
 - name: ghcr.io/api7/adc:0.24.3
 - name: apache/apisix:3.16.0-ubuntu
-- name: apache/apisix:3.14.1-ubuntu
 - name: apache/apisix:3.15.0-ubuntu
 - name: apache/apisix:3.13.0-debian
 - name: apache/apisix:3.11.0-debian
@@ -12,10 +10,6 @@
 - name: apache/apisix:3.1.0-debian
 - name: apache/shardingsphere-proxy:5.1.2
 - name: bitnami/etcd:3.5.10-debian-11-r2
-- name: bitnamilegacy/etcd:3.6.4-debian-12-r3
-  alias: bitnami-etcd
-- name: bitnami/etcd:3.5.7-debian-11-r14
-- name: bitnami/etcd:3.5.4-debian-11-r14
 - name: bitnami/jenkins:2.504.3-debian-12-r0
 - name: bitnami/kafka:3.7.0
 - name: bitnami/postgresql:15.4.0-debian-11-r45
@@ -23,7 +17,6 @@
 - name: bitnami/clickhouse:25.2.1-debian-12-r0
 - name: bitnami/minio:2024.12.18-debian-12-r1
 - name: bitnami/zookeeper:3.9.3-debian-12-r8
-- name: bitnami/mysql:8.0.33-debian-11-r0
 - name: bitnami/keycloak:26.2.1-debian-12-r0
 - name: keycloak/keycloak:26.6.0
 - name: bitnami/sealed-secrets-controller:v0.16.0
@@ -50,29 +43,24 @@
 - name: goharbor/harbor-portal:v2.9.0
 - name: goharbor/redis-photon:v2.9.0
 - name: goharbor/trivy-adapter-photon:v2.9.0
-- name: grafana/grafana:10.1.5
 - name: grafana/grafana:11.6.0
 - name: grafana/grafana:12.0.2
 - name: graphiteapp/graphite-statsd:1.1.10-5
 - name: jaegertracing/jaeger:2.4.0
-- name: langfuse/langfuse:2
 - name: langfuse/langfuse:3.111.0
 - name: langfuse/langfuse-worker:3.111.0
-- name: milvusdb/milvus:v2.4.9
 - name: milvusdb/milvus:v2.6.0
-- name: minio/minio:RELEASE.2023-03-20T20-16-18Z
 - name: mysql:8.0
 - name: nginx:1.27.1-alpine
 - name: nikolaik/python-nodejs:python3.10-nodejs20-slim
 - name: nocodb/nocodb
 - name: node:20-slim
 - name: node:14-bullseye-slim
-- name: postgres:14.1
 - name: postgres:16
 - name: prefecthq/prefect:3.2.14-python3.11
 - name: provectuslabs/kafka-ui:v0.7.2
-- name: python:3.10-slim
 - name: python:3.11-slim
+- name: python:3.12-slim
 - name: python:3.11-bookworm
 - name: qdrant/qdrant:v1.11.0
   alias: 1.11.0-qdrant
@@ -90,7 +78,6 @@
 - name: mcr.microsoft.com/devcontainers/javascript-node:1-18-bullseye
 - name: docker.io/dagster/dagster-celery-k8s:1.10.12
 - name: docker.io/dagster/dagster-celery-k8s:1.11.3
-- name: docker.io/bitnami/minideb:stretch
 - name: maven:3.9-eclipse-temurin-17-alpine
 - name: ghcr.io/windmill-labs/windmill:1.482
 - name: ghcr.io/windmill-labs/windmill-lsp:1.482
@@ -101,7 +88,6 @@
 - name: victoriametrics/victoria-traces:v0.5.1
 - name: prom/alertmanager:v0.28.1
 - name: timonwong/prometheus-webhook-dingtalk:v2.1.0
-- name: otel/opentelemetry-collector-contrib:0.131.0
 - name: otel/opentelemetry-collector-contrib:0.137.0
 - name: ghcr.io/astral-sh/uv:0.11.6
 - name: docker.getcollate.io/openmetadata/server:1.7.1
@@ -111,7 +97,6 @@
 - name: opensearchproject/opensearch:2.7.0
 - name: fluent/fluent-bit:4.0.3
 - name: dimitri/pgloader
-- name: jenkins/jenkins:2.504.3
 - name: jenkins/jenkins:2.541.3-jdk21
 - name: kiwigrid/k8s-sidecar:1.30.3
 - name: kiwigrid/k8s-sidecar:2.5.0
@@ -135,7 +120,6 @@
 - name: isindir/sops-secrets-operator:0.16.0
 - name: eclipse-temurin:17-jdk-alpine
 - name: vespaengine/vespa:8.603.19
-- name: quay.io/keycloak/keycloak:26.4.5
 - name: hashicorp/vault-secrets-operator:1.3.0
 - name: quay.io/brancz/kube-rbac-proxy:v0.18.1
 - name: ghcr.io/fluxcd/helm-controller:v1.4.5

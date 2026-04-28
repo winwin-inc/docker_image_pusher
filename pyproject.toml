@@ -1,7 +1,7 @@
 [project]
 name = "winwin-image-mirror"
 version = "0.1.0"
-description = "Add your description here"
+description = "使用 GitHub Action 将国外 Docker 镜像转存到阿里云私有仓库"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
@@ -23,7 +23,6 @@ packages = ["src/winwin_image_mirror"]
 [dependency-groups]
 dev = [
     "pytest>=9.0.2",
-    "playwright>=1.40.0",
 ]
 
 [project.scripts]
