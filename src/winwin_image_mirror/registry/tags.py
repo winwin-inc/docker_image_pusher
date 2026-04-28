@@ -1,26 +1,62 @@
 """Tag 操作模块
 
-提供 Docker Registry API 的 Tag 操作功能。
+提供 Docker Registry API 的 Tag 列表查询功能。
 """
 
+import base64
 import logging
+import re
 from typing import List, Optional
+from urllib.parse import urlencode
 
 import httpx
 
 from ..core.config import Config
-from .auth import get_auth_token
 
 logger = logging.getLogger(__name__)
 
 
-def get_image_tags() -> List[str]:
-    """获取镜像标签列表
+def _get_auth_token(scope_type: str = "pull") -> Optional[str]:
+    """获取 Docker Registry API 认证 token"""
+    try:
+        namespace = Config.get_namespace()
+        registry = Config.get_registry()
+        username = Config.get_username()
+        password = Config.get_password()
+    except KeyError as e:
+        logger.error(f"缺少环境变量: {e}")
+        return None
 
-    Returns:
-        镜像标签列表，如果失败则返回空列表
-    """
-    token = get_auth_token("pull")
+    url = f"https://{registry}/v2/{namespace}/tags/list"
+    response = httpx.get(url)
+
+    if response.status_code != 401:
+        return None
+
+    auth_header = response.headers.get("Www-Authenticate")
+    match = re.search(r'realm="([^"]+)",service="([^"]+)",scope="([^"]+)"', auth_header)
+    if not match:
+        return None
+
+    realm, service, _ = match.groups()
+    # scope 格式: repository:{namespace}:{action}，namespace 已包含 repo 名（如 "winwin/tool"）
+    scope = f"repository:{namespace}:{scope_type}"
+
+    credentials = f"{username}:{password}"
+    encoded_credentials = base64.b64encode(credentials.encode()).decode()
+
+    token_url = f"{realm}?" + urlencode({"service": service, "scope": scope})
+    headers = {"Authorization": f"Basic {encoded_credentials}"}
+
+    token_response = httpx.get(token_url, headers=headers)
+    if token_response.status_code == 200:
+        return token_response.json().get("token")
+    return None
+
+
+def get_image_tags() -> List[str]:
+    """获取镜像标签列表"""
+    token = _get_auth_token("pull")
     if not token:
         return []
 
@@ -40,136 +76,75 @@ def get_image_tags() -> List[str]:
 
     response = httpx.get(url, headers=headers)
     if response.status_code == 200:
-        data = response.json()
-        return data["tags"]
-    else:
-        logger.error(f"请求失败，状态码: {response.status_code}")
-        return []
+        return response.json()["tags"]
+    logger.error(f"请求失败，状态码: {response.status_code}")
+    return []
 
 
-def get_image_digest(
-    tag: str, namespace: Optional[str] = None, token: Optional[str] = None
-) -> Optional[str]:
-    """获取镜像标签的 Docker-Content-Digest
+def delete_tag(tag: str) -> str:
+    """通过 Registry API 删除指定镜像标签
 
     Args:
-        tag: 镜像标签
-        namespace: 命名空间，默认使用环境变量 ALIYUN_NAME_SPACE
-        token: 认证 token（如果为 None 则自动获取）
+        tag: 要删除的标签名称
 
     Returns:
-        digest 字符串或 None
+        "deleted": 成功删除
+        "not_found": 标签不存在
+        "error": 删除失败
     """
-    try:
-        namespace = namespace or Config.get_namespace()
-        registry = Config.get_registry()
-    except KeyError as e:
-        logger.error(f"缺少环境变量: {e}")
-        return None
-
-    # 如果没有提供 token，则获取 pull token
+    # 需要 push 权限才能删除
+    token = _get_auth_token("*")
     if not token:
-        token = get_auth_token("pull", namespace)
-        if not token:
-            logger.error("获取认证 token 失败")
-            return None
+        logger.error("无法获取认证 token，请检查阿里云凭证是否正确")
+        return "error"
 
-    # 获取 manifest
-    manifest_url = f"https://{registry}/v2/{namespace}/manifests/{tag}"
-    headers = {
-        "Authorization": f"Bearer {token}",
-        "Accept": "application/vnd.docker.distribution.manifest.v2+json, application/vnd.oci.image.manifest.v1+json",
-    }
-
-    logger.debug(f"获取 manifest: {manifest_url}")
-    response = httpx.get(manifest_url, headers=headers)
-
-    if response.status_code == 200:
-        digest = response.headers.get("Docker-Content-Digest")
-        if digest:
-            logger.debug(f"获取到 digest: {digest}")
-            return digest
-        else:
-            logger.error("无法从响应头获取 Docker-Content-Digest")
-            return None
-    elif response.status_code == 404:
-        logger.error(f"标签不存在: {tag}")
-        return None
-    else:
-        logger.error(f"获取 manifest 失败，状态码: {response.status_code}")
-        return None
-
-
-def delete_image_tag(tag: str, namespace: Optional[str] = None, dry_run: bool = False) -> bool:
-    """删除指定的镜像标签
-
-    Args:
-        tag: 要删除的标签
-        namespace: 命名空间
-        dry_run: 预览模式，不实际删除
-
-    Returns:
-        是否删除成功
-    """
     try:
-        namespace = namespace or Config.get_namespace()
+        namespace = Config.get_namespace()
         registry = Config.get_registry()
     except KeyError as e:
         logger.error(f"缺少环境变量: {e}")
-        return False
+        return "error"
 
-    prefix = "[DRY-RUN] " if dry_run else ""
-    logger.info(f"{prefix}准备删除标签: {tag}")
-
-    # 获取 delete 权限的 token
-    delete_token = get_auth_token("delete", namespace)
-    if not delete_token:
-        logger.error("获取删除权限 token 失败")
-        return False
-
-    # 获取 digest
-    digest = get_image_digest(tag, namespace)
-    if not digest:
-        logger.error(f"无法获取标签 {tag} 的 digest")
-        return False
-
-    logger.debug(f"标签 {tag} 的 digest: {digest}")
-
-    if dry_run:
-        logger.info(f"{prefix}将删除标签 {tag} (digest: {digest})")
-        return True
-
-    # 发送删除请求
-    delete_url = f"https://{registry}/v2/{namespace}/manifests/{digest}"
-    headers = {
-        "Docker-Distribution-Api-Version": "registry/2.0",
-        "Authorization": f"Bearer {delete_token}",
-    }
-
-    logger.info(f"发送删除请求: {delete_url}")
-    response = httpx.delete(delete_url, headers=headers)
-
-    if response.status_code in [200, 202]:
-        logger.info(f"成功删除标签: {tag}")
-        return True
-    elif response.status_code == 401:
-        logger.error(f"删除失败 {tag}: HTTP 401 - 权限不足")
-        logger.error("可能的原因:")
-        logger.error("  1. 当前账号没有删除镜像的权限")
-        logger.error("  2. 需要在阿里云控制台开通 API 删除权限")
-        logger.error("  3. 需要在 RAM 中配置容器镜像服务的删除权限")
-        logger.error("\n解决建议:")
-        logger.error("  - 方案1: 联系阿里云客服或提交工单申请删除权限")
-        logger.error("  - 方案2: 使用阿里云控制台手动删除")
-        logger.error("  - 方案3: 使用浏览器自动化（参考 浏览器删除方案.md）")
-        logger.error(f"\n账号: {Config.get_username()}")
-        logger.error(f"命名空间: {namespace}")
-        logger.error(f"标签: {tag}")
-        return False
-    elif response.status_code == 404:
-        logger.warning(f"标签不存在: {tag}")
-        return False
+    # 获取 tag 的 digest（尝试 v2 和 v1 两种 manifest schema）
+    manifest_url = f"https://{registry}/v2/{namespace}/manifests/{tag}"
+    for accept in [
+        "application/vnd.docker.distribution.manifest.v2+json",
+        "application/vnd.docker.distribution.manifest.list.v2+json",
+        "application/vnd.oci.image.index.v1+json",
+        "application/vnd.docker.distribution.manifest.v1+json",
+    ]:
+        head_resp = httpx.head(
+            manifest_url,
+            headers={"Authorization": f"Bearer {token}", "Accept": accept},
+            timeout=30,
+        )
+        if head_resp.status_code == 200:
+            break
     else:
-        logger.error(f"删除失败 {tag}: HTTP {response.status_code}")
-        logger.error(f"响应内容: {response.text}")
-        return False
+        # 所有 schema 都返回 404，说明 tag 不存在
+        if head_resp.status_code == 404:
+            logger.info(f"tag '{tag}' 不存在（已删除或从未推送）")
+            return "not_found"
+        logger.error(f"获取 tag '{tag}' 的 digest 失败，状态码: {head_resp.status_code}")
+        return "error"
+
+    digest = head_resp.headers.get("Docker-Content-Digest")
+    if not digest:
+        logger.error(f"tag '{tag}' 响应中无 Docker-Content-Digest")
+        return "error"
+
+    # 删除 manifest
+    delete_url = f"https://{registry}/v2/{namespace}/manifests/{digest}"
+    del_resp = httpx.delete(
+        delete_url,
+        headers={"Authorization": f"Bearer {token}"},
+        timeout=30,
+    )
+    if del_resp.status_code in (202, 204):
+        logger.info(f"✓ 删除成功: {tag}")
+        return "deleted"
+    else:
+        logger.error(
+            f"删除 tag '{tag}' 失败，状态码: {del_resp.status_code}, 响应: {del_resp.text[:200]}"
+        )
+        return "error"

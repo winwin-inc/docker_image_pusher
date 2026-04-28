@@ -6,21 +6,16 @@
 import typer
 from dotenv import load_dotenv
 
-from .commands import delete_api, list, push
-from .commands.delete_browser import batch, login, regex, single
+from .commands import list, push
+from .commands.delete import register as delete_register
 
 load_dotenv()
-# 创建 Typer 应用
+
 app = typer.Typer()
 
-# 注册命令
 list.register(app)
 push.register(app)
-delete_api.register(app)
-login.register(app)
-single.register(app)
-batch.register(app)
-regex.register(app)
+delete_register(app)
 
 if __name__ == "__main__":
     app()
