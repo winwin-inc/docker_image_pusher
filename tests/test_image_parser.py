@@ -1,7 +1,6 @@
 """测试镜像解析模块"""
-import pytest
 
-from src.image.parser import parse_image, get_image_tag
+from src.winwin_image_mirror.image.parser import get_image_tag, parse_image
 
 
 class TestParseImage:

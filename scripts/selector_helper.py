@@ -5,18 +5,18 @@ Playwright 元素选择器助手
 帮助您找到正确的 CSS 选择器来定位页面元素
 """
 
-import sys
 import os
 
 # 加载环境变量
-if os.path.exists('.env.beijing'):
-    with open('.env.beijing') as f:
+if os.path.exists(".env.beijing"):
+    with open(".env.beijing") as f:
         for line in f:
-            if '=' in line and not line.startswith('#'):
-                key, value = line.strip().split('=', 1)
+            if "=" in line and not line.startswith("#"):
+                key, value = line.strip().split("=", 1)
                 os.environ[key.strip()] = value.strip()
 
 from playwright.sync_api import sync_playwright
+
 
 def main():
     print("=" * 60)
@@ -25,8 +25,8 @@ def main():
     print()
 
     # 构建目标 URL
-    registry = os.getenv('ALIYUN_REGISTRY', 'registry.cn-beijing.aliyuncs.com')
-    namespace = os.getenv('ALIYUN_NAME_SPACE', 'winwin/tool')
+    registry = os.getenv("ALIYUN_REGISTRY", "registry.cn-beijing.aliyuncs.com")
+    namespace = os.getenv("ALIYUN_NAME_SPACE", "winwin/tool")
     region = registry.replace("registry.", "").replace(".aliyuncs.com", "")
     url = f"https://cr.console.aliyun.com/repository/{region}/{namespace}/images"
 
@@ -52,7 +52,7 @@ def main():
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=False, slow_mo=1000)
-        context = browser.new_context(viewport={'width': 1920, 'height': 1080})
+        context = browser.new_context(viewport={"width": 1920, "height": 1080})
         page = context.new_page()
 
         try:
@@ -70,6 +70,7 @@ def main():
 
     print()
     print("浏览器已关闭")
+
 
 if __name__ == "__main__":
     main()

@@ -2,6 +2,7 @@
 
 实现列出已推送镜像的功能。
 """
+
 import typer
 
 from ..core.config import Config

@@ -2,6 +2,7 @@
 
 提供 Docker Registry API 认证功能。
 """
+
 import base64
 import logging
 import re

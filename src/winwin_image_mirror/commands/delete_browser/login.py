@@ -2,7 +2,9 @@
 
 实现保存浏览器登录状态的功能。
 """
+
 import os
+
 import typer
 
 from ...browser.state import save_login_state
@@ -26,9 +28,6 @@ def register(app: typer.Typer):
             cli.py delete-browser-login
         """
         # 默认登录状态文件路径
-        storage_state_path = os.getenv(
-            "ALIYUN_STATE_PATH",
-            "data/aliyun_state.json"
-        )
+        storage_state_path = os.getenv("ALIYUN_STATE_PATH", "data/aliyun_state.json")
 
         save_login_state(storage_state_path)

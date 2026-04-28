@@ -1,10 +1,11 @@
 """测试配置管理模块"""
+
 import os
-import pytest
 from unittest.mock import patch
 
-from src.core.config import Config
-from src.core.exceptions import ConfigError
+import pytest
+
+from src.winwin_image_mirror.core.config import Config
 
 
 class TestConfig:
@@ -13,22 +14,22 @@ class TestConfig:
     def test_get_registry(self, mock_env_vars):
         """测试获取 Registry 地址"""
         registry = Config.get_registry()
-        assert registry == 'registry.cn-beijing.aliyuncs.com'
+        assert registry == "registry.cn-beijing.aliyuncs.com"
 
     def test_get_namespace(self, mock_env_vars):
         """测试获取命名空间"""
         namespace = Config.get_namespace()
-        assert namespace == 'winwin'
+        assert namespace == "winwin"
 
     def test_get_username(self, mock_env_vars):
         """测试获取用户名"""
         username = Config.get_username()
-        assert username == 'test_user'
+        assert username == "test_user"
 
     def test_get_password(self, mock_env_vars):
         """测试获取密码"""
         password = Config.get_password()
-        assert password == 'test_password'
+        assert password == "test_password"
 
     def test_validate_success(self, mock_env_vars):
         """测试验证成功"""

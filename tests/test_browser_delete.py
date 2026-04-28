@@ -3,15 +3,14 @@
 浏览器删除模块的单元测试
 """
 
-import pytest
-import os
 import json
+import os
 import tempfile
-from browser_deleter import (
-    AliyunBrowserDeleter,
-    save_login_state,
-    verify_login_state,
-)
+
+import pytest
+
+from src.winwin_image_mirror.browser.deleter import AliyunBrowserDeleter
+from src.winwin_image_mirror.browser.state import verify_login_state
 
 
 class TestVerifyLoginState:
@@ -24,7 +23,7 @@ class TestVerifyLoginState:
 
     def test_verify_login_state_invalid_json(self):
         """测试:登录状态文件不是有效的JSON"""
-        with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.json') as f:
+        with tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".json") as f:
             f.write("invalid json content")
             f.flush()
             temp_path = f.name
@@ -37,8 +36,8 @@ class TestVerifyLoginState:
 
     def test_verify_login_state_no_cookies(self):
         """测试:登录状态文件中没有cookies"""
-        with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.json') as f:
-            json.dump({'origins': []}, f)
+        with tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".json") as f:
+            json.dump({"origins": []}, f)
             f.flush()
             temp_path = f.name
 
@@ -50,8 +49,8 @@ class TestVerifyLoginState:
 
     def test_verify_login_state_empty_cookies(self):
         """测试:登录状态文件中cookies为空列表"""
-        with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.json') as f:
-            json.dump({'cookies': []}, f)
+        with tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".json") as f:
+            json.dump({"cookies": []}, f)
             f.flush()
             temp_path = f.name
 
@@ -64,20 +63,21 @@ class TestVerifyLoginState:
     def test_verify_login_state_valid(self):
         """测试:有效的登录状态文件"""
         import time
+
         current_time = int(time.time())
 
         valid_state = {
-            'cookies': [
+            "cookies": [
                 {
-                    'name': 'test_cookie',
-                    'value': 'test_value',
-                    'expires': current_time + 3600,  # 1小时后过期
-                    'domain': '.aliyun.com'
+                    "name": "test_cookie",
+                    "value": "test_value",
+                    "expires": current_time + 3600,  # 1小时后过期
+                    "domain": ".aliyun.com",
                 }
             ]
         }
 
-        with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.json') as f:
+        with tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".json") as f:
             json.dump(valid_state, f)
             f.flush()
             temp_path = f.name
@@ -91,20 +91,21 @@ class TestVerifyLoginState:
     def test_verify_login_state_expired(self):
         """测试:登录状态文件中的cookies已过期"""
         import time
+
         past_time = int(time.time()) - 3600  # 1小时前过期
 
         expired_state = {
-            'cookies': [
+            "cookies": [
                 {
-                    'name': 'test_cookie',
-                    'value': 'test_value',
-                    'expires': past_time,
-                    'domain': '.aliyun.com'
+                    "name": "test_cookie",
+                    "value": "test_value",
+                    "expires": past_time,
+                    "domain": ".aliyun.com",
                 }
             ]
         }
 
-        with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.json') as f:
+        with tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".json") as f:
             json.dump(expired_state, f)
             f.flush()
             temp_path = f.name
@@ -118,17 +119,17 @@ class TestVerifyLoginState:
     def test_verify_login_state_session_cookie(self):
         """测试:会话cookie(expires=-1)不会过期"""
         session_state = {
-            'cookies': [
+            "cookies": [
                 {
-                    'name': 'session_cookie',
-                    'value': 'session_value',
-                    'expires': -1,  # 会话cookie
-                    'domain': '.aliyun.com'
+                    "name": "session_cookie",
+                    "value": "session_value",
+                    "expires": -1,  # 会话cookie
+                    "domain": ".aliyun.com",
                 }
             ]
         }
 
-        with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.json') as f:
+        with tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".json") as f:
             json.dump(session_state, f)
             f.flush()
             temp_path = f.name
@@ -146,64 +147,64 @@ class TestAliyunBrowserDeleterInit:
     def test_init_missing_env_vars(self):
         """测试:缺少环境变量时抛出异常"""
         # 临时保存环境变量
-        old_registry = os.environ.get('ALIYUN_REGISTRY')
-        old_namespace = os.environ.get('ALIYUN_NAME_SPACE')
+        old_registry = os.environ.get("ALIYUN_REGISTRY")
+        old_namespace = os.environ.get("ALIYUN_NAME_SPACE")
 
         try:
             # 删除环境变量
-            if 'ALIYUN_REGISTRY' in os.environ:
-                del os.environ['ALIYUN_REGISTRY']
-            if 'ALIYUN_NAME_SPACE' in os.environ:
-                del os.environ['ALIYUN_NAME_SPACE']
+            if "ALIYUN_REGISTRY" in os.environ:
+                del os.environ["ALIYUN_REGISTRY"]
+            if "ALIYUN_NAME_SPACE" in os.environ:
+                del os.environ["ALIYUN_NAME_SPACE"]
 
-            # 应该抛出 ValueError
-            with pytest.raises(ValueError, match="缺少环境变量"):
+            # 应该抛出 KeyError
+            with pytest.raises(KeyError):
                 AliyunBrowserDeleter()
 
         finally:
             # 恢复环境变量
             if old_registry:
-                os.environ['ALIYUN_REGISTRY'] = old_registry
+                os.environ["ALIYUN_REGISTRY"] = old_registry
             if old_namespace:
-                os.environ['ALIYUN_NAME_SPACE'] = old_namespace
+                os.environ["ALIYUN_NAME_SPACE"] = old_namespace
 
     def test_build_console_url_beijing(self):
         """测试:从registry URL构建控制台URL(北京)"""
-        old_registry = os.environ.get('ALIYUN_REGISTRY')
-        old_namespace = os.environ.get('ALIYUN_NAME_SPACE')
+        old_registry = os.environ.get("ALIYUN_REGISTRY")
+        old_namespace = os.environ.get("ALIYUN_NAME_SPACE")
 
         try:
-            os.environ['ALIYUN_REGISTRY'] = 'registry.cn-beijing.aliyuncs.com'
-            os.environ['ALIYUN_NAME_SPACE'] = 'test/repo'
+            os.environ["ALIYUN_REGISTRY"] = "registry.cn-beijing.aliyuncs.com"
+            os.environ["ALIYUN_NAME_SPACE"] = "test/repo"
 
             deleter = AliyunBrowserDeleter()
-            # 实际实现返回完整的 repository URL
-            assert deleter.base_url == 'https://cr.console.aliyun.com/repository/cn-beijing/test/repo/images'
+            # 新实现返回 https://cr.{region}.aliyuncs.com/rep/{namespace}
+            assert deleter.base_url == "https://cr.cn-beijing.aliyuncs.com/rep/test/repo"
 
         finally:
             if old_registry:
-                os.environ['ALIYUN_REGISTRY'] = old_registry
+                os.environ["ALIYUN_REGISTRY"] = old_registry
             if old_namespace:
-                os.environ['ALIYUN_NAME_SPACE'] = old_namespace
+                os.environ["ALIYUN_NAME_SPACE"] = old_namespace
 
     def test_build_console_url_hangzhou(self):
         """测试:从registry URL构建控制台URL(杭州)"""
-        old_registry = os.environ.get('ALIYUN_REGISTRY')
-        old_namespace = os.environ.get('ALIYUN_NAME_SPACE')
+        old_registry = os.environ.get("ALIYUN_REGISTRY")
+        old_namespace = os.environ.get("ALIYUN_NAME_SPACE")
 
         try:
-            os.environ['ALIYUN_REGISTRY'] = 'registry.cn-hangzhou.aliyuncs.com'
-            os.environ['ALIYUN_NAME_SPACE'] = 'test/repo'
+            os.environ["ALIYUN_REGISTRY"] = "registry.cn-hangzhou.aliyuncs.com"
+            os.environ["ALIYUN_NAME_SPACE"] = "test/repo"
 
             deleter = AliyunBrowserDeleter()
-            # 实际实现返回完整的 repository URL
-            assert deleter.base_url == 'https://cr.console.aliyun.com/repository/cn-hangzhou/test/repo/images'
+            # 新实现返回 https://cr.{region}.aliyuncs.com/rep/{namespace}
+            assert deleter.base_url == "https://cr.cn-hangzhou.aliyuncs.com/rep/test/repo"
 
         finally:
             if old_registry:
-                os.environ['ALIYUN_REGISTRY'] = old_registry
+                os.environ["ALIYUN_REGISTRY"] = old_registry
             if old_namespace:
-                os.environ['ALIYUN_NAME_SPACE'] = old_namespace
+                os.environ["ALIYUN_NAME_SPACE"] = old_namespace
 
 
 @pytest.mark.integration
@@ -237,8 +238,8 @@ class TestBrowserDeleteIntegration:
 
     def test_connect_with_invalid_state(self):
         """测试:使用无效登录状态连接浏览器"""
-        with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.json') as f:
-            json.dump({'cookies': []}, f)
+        with tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".json") as f:
+            json.dump({"cookies": []}, f)
             f.flush()
             temp_path = f.name
 

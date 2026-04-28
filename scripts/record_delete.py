@@ -9,18 +9,18 @@
     4. 查看生成的代码
 """
 
-import sys
 import os
 
 # 加载环境变量
-if os.path.exists('.env.beijing'):
-    with open('.env.beijing') as f:
+if os.path.exists(".env.beijing"):
+    with open(".env.beijing") as f:
         for line in f:
-            if '=' in line and not line.startswith('#'):
-                key, value = line.strip().split('=', 1)
+            if "=" in line and not line.startswith("#"):
+                key, value = line.strip().split("=", 1)
                 os.environ[key.strip()] = value.strip()
 
 from playwright.sync_api import sync_playwright
+
 
 def main():
     print("=" * 60)
@@ -29,12 +29,12 @@ def main():
     print()
 
     # 构建目标 URL
-    registry = os.getenv('ALIYUN_REGISTRY', 'registry.cn-beijing.aliyuncs.com')
-    namespace = os.getenv('ALIYUN_NAME_SPACE', 'winwin/tool')
+    registry = os.getenv("ALIYUN_REGISTRY", "registry.cn-beijing.aliyuncs.com")
+    namespace = os.getenv("ALIYUN_NAME_SPACE", "winwin/tool")
     region = registry.replace("registry.", "").replace(".aliyuncs.com", "")
     url = f"https://cr.console.aliyun.com/repository/{region}/{namespace}/images"
 
-    print(f"📹 将录制以下页面的操作:")
+    print("📹 将录制以下页面的操作:")
     print(f"   URL: {url}")
     print()
     print("📋 录制步骤:")
@@ -50,7 +50,7 @@ def main():
     print()
 
     # 检查是否已有登录状态
-    use_saved_state = os.path.exists('aliyun_state.json')
+    use_saved_state = os.path.exists("aliyun_state.json")
     if use_saved_state:
         print("✅ 检测到已保存的登录状态,将使用该状态")
 
@@ -59,19 +59,16 @@ def main():
     with sync_playwright() as p:
         browser = p.chromium.launch(
             headless=False,
-            slow_mo=500  # 减慢操作,方便查看
+            slow_mo=500,  # 减慢操作,方便查看
         )
 
         # 使用保存的登录状态(如果存在)
         if use_saved_state:
             context = browser.new_context(
-                storage_state='aliyun_state.json',
-                viewport={'width': 1920, 'height': 1080}
+                storage_state="aliyun_state.json", viewport={"width": 1920, "height": 1080}
             )
         else:
-            context = browser.new_context(
-                viewport={'width': 1920, 'height': 1080}
-            )
+            context = browser.new_context(viewport={"width": 1920, "height": 1080})
 
         page = context.new_page()
 
@@ -118,8 +115,11 @@ def main():
     print("   - 或: document.querySelectorAll('your-selector')")
     print()
     print("3. 更新代码:")
-    print("   - 将选择器添加到 browser_deleter.py 的 _locate_tag_element 方法")
+    print(
+        "   - 将选择器添加到 src/winwin_image_mirror/browser/deleter.py 的 _locate_tag_element 方法"
+    )
     print("=" * 60)
+
 
 if __name__ == "__main__":
     main()

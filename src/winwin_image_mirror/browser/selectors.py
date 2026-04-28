@@ -3,7 +3,6 @@
 集中管理所有用于浏览器自动化的 CSS 选择器。
 """
 
-
 # 下一页按钮选择器
 NEXT_PAGE_SELECTORS = [
     "button:has-text('下一页')",
@@ -17,6 +16,7 @@ PREV_PAGE_SELECTORS = [
     "button:has-text('Previous')",
     "[data-testid='prev-page-btn']",
 ]
+
 
 # Tag 元素选择器模板
 def get_tag_selectors(tag: str) -> list:

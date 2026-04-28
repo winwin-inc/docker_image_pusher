@@ -2,6 +2,7 @@
 
 提供 Docker Registry API 的 Tag 操作功能。
 """
+
 import logging
 from typing import List, Optional
 
@@ -46,7 +47,9 @@ def get_image_tags() -> List[str]:
         return []
 
 
-def get_image_digest(tag: str, namespace: Optional[str] = None, token: Optional[str] = None) -> Optional[str]:
+def get_image_digest(
+    tag: str, namespace: Optional[str] = None, token: Optional[str] = None
+) -> Optional[str]:
     """获取镜像标签的 Docker-Content-Digest
 
     Args:
@@ -75,7 +78,7 @@ def get_image_digest(tag: str, namespace: Optional[str] = None, token: Optional[
     manifest_url = f"https://{registry}/v2/{namespace}/manifests/{tag}"
     headers = {
         "Authorization": f"Bearer {token}",
-        "Accept": "application/vnd.docker.distribution.manifest.v2+json, application/vnd.oci.image.manifest.v1+json"
+        "Accept": "application/vnd.docker.distribution.manifest.v2+json, application/vnd.oci.image.manifest.v1+json",
     }
 
     logger.debug(f"获取 manifest: {manifest_url}")

@@ -208,7 +208,7 @@ uv run playwright codegen \
   -o working_delete.py
 
 # 2. 查看生成的代码,找到正确的选择器
-# 3. 将选择器更新到 browser_deleter.py
+# 3. 将选择器更新到 src/winwin_image_mirror/browser/deleter.py
 ```
 
 ### 应用 2: 创建测试脚本
@@ -278,7 +278,7 @@ uv run playwright codegen <URL> --save-storage=./auth.json
 2. **录制**: 使用 `codegen` 录制操作
 3. **查看**: 检查生成的代码和选择器
 4. **优化**: 添加等待、错误处理
-5. **集成**: 将选择器更新到 `browser_deleter.py`
+5. **集成**: 将选择器更新到 `src/winwin_image_mirror/browser/deleter.py`
 6. **测试**: 运行并验证功能
 
 录制是快速定位问题和学习页面结构的强大工具!

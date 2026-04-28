@@ -8,9 +8,10 @@
 3. 配置阿里云账号和密码
 """
 
-from playwright.sync_api import sync_playwright
-import time
 import os
+import time
+
+from playwright.sync_api import sync_playwright
 
 
 def delete_aliyun_image_tag(
@@ -19,7 +20,7 @@ def delete_aliyun_image_tag(
     tag: str,
     username: str,
     password: str,
-    headless: bool = False
+    headless: bool = False,
 ):
     """
     通过浏览器自动化删除阿里云镜像 tag
@@ -60,7 +61,7 @@ def delete_aliyun_image_tag(
             # 这需要实际的页面元素定位器
 
             # 步骤 4: 找到对应的镜像仓库
-            print(f"查找镜像仓库...")
+            print("查找镜像仓库...")
 
             # 步骤 5: 查找并删除指定 tag
             print(f"删除 tag: {tag}")
@@ -81,7 +82,7 @@ def delete_multiple_tags(
     tags: list,
     username: str,
     password: str,
-    headless: bool = False
+    headless: bool = False,
 ):
     """
     批量删除多个 tags
@@ -103,7 +104,7 @@ def delete_multiple_tags(
             tag=tag,
             username=username,
             password=password,
-            headless=headless
+            headless=headless,
         )
         time.sleep(2)  # 间隔 2 秒
 
@@ -122,5 +123,5 @@ if __name__ == "__main__":
         tag="test-tag-to-delete",
         username=USERNAME,
         password=PASSWORD,
-        headless=False  # 显示浏览器窗口，便于调试
+        headless=False,  # 显示浏览器窗口，便于调试
     )

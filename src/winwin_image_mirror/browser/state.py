@@ -2,11 +2,12 @@
 
 提供保存和验证浏览器登录状态的功能。
 """
+
 import json
 import logging
 import os
+import time
 from pathlib import Path
-from typing import Optional
 
 from playwright.sync_api import sync_playwright
 
@@ -73,19 +74,21 @@ def verify_login_state(storage_state_path: str) -> bool:
 
     # 读取并验证文件内容
     try:
-        with open(state_file, 'r') as f:
+        with open(state_file, "r") as f:
             state = json.load(f)
 
         # 检查是否包含 cookies
-        if not state.get('cookies'):
+        if not state.get("cookies"):
             logger.error("登录状态文件无效：未找到 cookies")
             return False
 
         # 检查 cookies 是否包含必要的信息
-        cookies = state['cookies']
+        cookies = state["cookies"]
+        current_time = int(time.time())
         has_valid_cookie = any(
-            cookie.get('domain', '').endswith('aliyun.com')
-            and cookie.get('expires', -1) > 0
+            cookie.get("domain", "").endswith("aliyun.com")
+            and cookie.get("expires", -1) != 0  # -1 表示会话 cookie，永不过期
+            and (cookie.get("expires", -1) == -1 or cookie.get("expires", -1) > current_time)
             for cookie in cookies
         )
 

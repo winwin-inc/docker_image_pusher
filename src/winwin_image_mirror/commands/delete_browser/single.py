@@ -2,6 +2,7 @@
 
 实现使用浏览器删除单个标签的功能。
 """
+
 import os
 import sys
 
@@ -22,7 +23,7 @@ def register(app: typer.Typer):
     def delete_browser_single(
         tag: str = Argument(..., help="要删除的标签"),
         dry_run: bool = Option(False, "--dry-run", help="预览模式，不实际删除"),
-        show_browser: bool = Option(False, "--show-browser", help="显示浏览器窗口")
+        show_browser: bool = Option(False, "--show-browser", help="显示浏览器窗口"),
     ):
         """使用浏览器自动化删除单个标签
 
@@ -34,10 +35,7 @@ def register(app: typer.Typer):
             cli.py delete-browser-single v1.0.0 --dry-run
             cli.py delete-browser-single v1.0.0 --show-browser
         """
-        storage_state_path = os.getenv(
-            "ALIYUN_STATE_PATH",
-            "data/aliyun_state.json"
-        )
+        storage_state_path = os.getenv("ALIYUN_STATE_PATH", "data/aliyun_state.json")
 
         # 预览模式
         if dry_run:
@@ -48,8 +46,7 @@ def register(app: typer.Typer):
 
         # 创建删除器并执行删除
         with AliyunBrowserDeleter(
-            storage_state_path=storage_state_path,
-            headless=not show_browser
+            storage_state_path=storage_state_path, headless=not show_browser
         ) as deleter:
             success = deleter.delete_single_tag(tag)
 

@@ -2,16 +2,16 @@
 
 实现推送新镜像的功能。
 """
+
 import logging
-import yaml
 from pathlib import Path
 from typing import Dict
 
 import typer
+import yaml
 from prettytable import PrettyTable
 
-from ..core.config import Config
-from ..image.parser import parse_image, get_image_tag
+from ..image.parser import get_image_tag, parse_image
 from ..image.pusher import push_image
 from ..registry.tags import get_image_tags
 

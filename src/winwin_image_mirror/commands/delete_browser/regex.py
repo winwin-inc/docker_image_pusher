@@ -2,6 +2,7 @@
 
 实现使用浏览器按正则表达式删除标签的功能。
 """
+
 import os
 import sys
 
@@ -24,7 +25,7 @@ def register(app: typer.Typer):
         dry_run: bool = Option(False, "--dry-run", help="预览模式，不实际删除"),
         force: bool = Option(False, "--force", help="跳过确认提示"),
         show_browser: bool = Option(False, "--show-browser", help="显示浏览器窗口"),
-        limit: int = Option(100, "--limit", "-l", help="限制删除数量")
+        limit: int = Option(100, "--limit", "-l", help="限制删除数量"),
     ):
         """使用浏览器自动化按正则表达式批量删除标签
 
@@ -36,14 +37,11 @@ def register(app: typer.Typer):
             cli.py delete-browser-regex "2025.*" --force
             cli.py delete-browser-regex "^v1\\.0\\..*$" --limit 50
         """
-        storage_state_path = os.getenv(
-            "ALIYUN_STATE_PATH",
-            "data/aliyun_state.json"
-        )
+        storage_state_path = os.getenv("ALIYUN_STATE_PATH", "data/aliyun_state.json")
 
         # 预览模式
         if dry_run:
-            print(f"[DRY-RUN] 将使用浏览器按正则表达式删除标签:")
+            print("[DRY-RUN] 将使用浏览器按正则表达式删除标签:")
             print(f"[DRY-RUN] 模式: {pattern}")
             print(f"[DRY-RUN] 限制: {limit}")
             print(f"[DRY-RUN] 登录状态文件: {storage_state_path}")
@@ -52,8 +50,7 @@ def register(app: typer.Typer):
 
         # 创建删除器并执行删除
         with AliyunBrowserDeleter(
-            storage_state_path=storage_state_path,
-            headless=not show_browser
+            storage_state_path=storage_state_path, headless=not show_browser
         ) as deleter:
             results = deleter.delete_regex_tags(pattern, limit=limit)
 
@@ -65,7 +62,7 @@ def register(app: typer.Typer):
             success_count = sum(1 for v in results.values() if v)
             failed_count = len(results) - success_count
 
-            print(f"\n删除结果:")
+            print("\n删除结果:")
             print(f"  匹配: {len(results)}")
             print(f"  成功: {success_count}")
             print(f"  失败: {failed_count}")

@@ -2,8 +2,8 @@
 
 提供统一的配置访问接口，管理环境变量。
 """
+
 import os
-from typing import Optional
 
 
 class Config:
@@ -22,7 +22,7 @@ class Config:
         Raises:
             KeyError: 当环境变量 ALIYUN_REGISTRY 未设置时
         """
-        return os.environ['ALIYUN_REGISTRY']
+        return os.environ["ALIYUN_REGISTRY"]
 
     @staticmethod
     def get_namespace() -> str:
@@ -34,7 +34,7 @@ class Config:
         Raises:
             KeyError: 当环境变量 ALIYUN_NAME_SPACE 未设置时
         """
-        return os.environ['ALIYUN_NAME_SPACE']
+        return os.environ["ALIYUN_NAME_SPACE"]
 
     @staticmethod
     def get_username() -> str:
@@ -46,7 +46,7 @@ class Config:
         Raises:
             KeyError: 当环境变量 ALIYUN_REGISTRY_USER 未设置时
         """
-        return os.environ['ALIYUN_REGISTRY_USER']
+        return os.environ["ALIYUN_REGISTRY_USER"]
 
     @staticmethod
     def get_password() -> str:
@@ -58,7 +58,7 @@ class Config:
         Raises:
             KeyError: 当环境变量 ALIYUN_REGISTRY_PASSWORD 未设置时
         """
-        return os.environ['ALIYUN_REGISTRY_PASSWORD']
+        return os.environ["ALIYUN_REGISTRY_PASSWORD"]
 
     @staticmethod
     def validate() -> bool:
@@ -71,10 +71,10 @@ class Config:
             KeyError: 当有必需的环境变量未设置时
         """
         required_vars = [
-            'ALIYUN_REGISTRY',
-            'ALIYUN_NAME_SPACE',
-            'ALIYUN_REGISTRY_USER',
-            'ALIYUN_REGISTRY_PASSWORD'
+            "ALIYUN_REGISTRY",
+            "ALIYUN_NAME_SPACE",
+            "ALIYUN_REGISTRY_USER",
+            "ALIYUN_REGISTRY_PASSWORD",
         ]
 
         missing_vars = [var for var in required_vars if var not in os.environ]

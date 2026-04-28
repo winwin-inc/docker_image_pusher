@@ -2,25 +2,23 @@
 
 提供通过浏览器自动化删除阿里云镜像标签的功能。
 """
-import json
+
 import logging
 import os
 import re
 import time
-from typing import Dict, List, Optional
+from typing import Dict, List
 
-from playwright.sync_api import Page, sync_playwright
+from playwright.sync_api import sync_playwright
 
 from ..core.config import Config
 from ..registry.tags import get_image_tags
 from .selectors import (
+    CONFIRM_BUTTON_SELECTORS,
     DELETE_BUTTON_SELECTORS,
     NEXT_PAGE_SELECTORS,
-    CONFIRM_BUTTON_SELECTORS,
-    PAGE_NUMBER_SELECTOR,
     get_tag_selectors,
 )
-from .state import verify_login_state
 
 logger = logging.getLogger(__name__)
 
@@ -36,7 +34,7 @@ class AliyunBrowserDeleter:
         storage_state_path: str = "data/aliyun_state.json",
         headless: bool = True,
         timeout: int = 30000,
-        delay: float = 2.0
+        delay: float = 2.0,
     ):
         """初始化浏览器删除器
 
@@ -75,16 +73,14 @@ class AliyunBrowserDeleter:
         try:
             self.playwright = sync_playwright().start()
             self.browser = self.playwright.chromium.launch(
-                headless=self.headless,
-                args=['--no-sandbox', '--disable-setuid-sandbox']
+                headless=self.headless, args=["--no-sandbox", "--disable-setuid-sandbox"]
             )
 
             # 加载保存的登录状态
             if os.path.exists(self.storage_state_path):
                 logger.debug(f"加载登录状态: {self.storage_state_path}")
                 self.context = self.browser.new_context(
-                    storage_state=self.storage_state_path,
-                    viewport={'width': 1920, 'height': 1080}
+                    storage_state=self.storage_state_path, viewport={"width": 1920, "height": 1080}
                 )
             else:
                 logger.error(f"未找到登录状态文件: {self.storage_state_path}")
@@ -132,7 +128,7 @@ class AliyunBrowserDeleter:
 
             for page_num in range(2, max_pages + 1):
                 if not self._click_next_page():
-                    logger.warning(f"未找到下一页按钮或已到最后一页")
+                    logger.warning("未找到下一页按钮或已到最后一页")
                     break
 
                 logger.info(f"进入第 {page_num} 页查找...")
@@ -283,7 +279,7 @@ class AliyunBrowserDeleter:
         """
         # 从 registry 地址提取区域
         # 例如: registry.cn-hangzhou.aliyuncs.com -> cn-hangzhou
-        region_match = re.search(r'registry\.([^.]+)\.aliyuncs\.com', self.registry)
+        region_match = re.search(r"registry\.([^.]+)\.aliyuncs\.com", self.registry)
         if region_match:
             region = region_match.group(1)
             return f"https://cr.{region}.aliyuncs.com/rep/{self.namespace}"

@@ -80,5 +80,5 @@ if [ -f recorded_delete.py ]; then
     echo "💡 下一步:"
     echo "1. 查看生成的代码: cat recorded_delete.py"
     echo "2. 运行代码: uv run python recorded_delete.py"
-    echo "3. 提取选择器并更新到 browser_deleter.py"
+    echo "3. 提取选择器并更新到 src/winwin_image_mirror/browser/deleter.py"
 fi

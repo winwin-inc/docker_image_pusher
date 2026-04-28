@@ -2,6 +2,7 @@
 
 实现通过 Docker Registry API 删除镜像标签的功能。
 """
+
 import logging
 import re
 import sys
@@ -9,7 +10,7 @@ import sys
 import typer
 from typer import Argument, Option
 
-from ..registry.tags import get_image_tags, delete_image_tag
+from ..registry.tags import delete_image_tag, get_image_tags
 
 logger = logging.getLogger(__name__)
 
@@ -24,7 +25,7 @@ def register(app: typer.Typer):
     @app.command()
     def delete(
         tag: str = Argument(..., help="要删除的标签"),
-        dry_run: bool = Option(False, "--dry-run", help="预览模式，不实际删除")
+        dry_run: bool = Option(False, "--dry-run", help="预览模式，不实际删除"),
     ):
         """删除单个镜像标签
 
@@ -46,7 +47,7 @@ def register(app: typer.Typer):
     def delete_batch(
         tags: str = Argument(..., help="要删除的标签，用空格分隔"),
         dry_run: bool = Option(False, "--dry-run", help="预览模式，不实际删除"),
-        force: bool = Option(False, "--force", help="跳过确认提示")
+        force: bool = Option(False, "--force", help="跳过确认提示"),
     ):
         """批量删除多个镜像标签
 
@@ -75,7 +76,7 @@ def register(app: typer.Typer):
                 failed_tags.append(tag)
 
         # 输出统计
-        print(f"\n删除结果:")
+        print("\n删除结果:")
         print(f"  成功: {success_count}")
         print(f"  失败: {failed_count}")
         if failed_tags:
@@ -89,7 +90,7 @@ def register(app: typer.Typer):
         pattern: str = Argument(..., help="正则表达式模式"),
         dry_run: bool = Option(False, "--dry-run", help="预览模式，不实际删除"),
         force: bool = Option(False, "--force", help="跳过确认提示"),
-        limit: int = Option(100, "--limit", "-l", help="限制删除数量")
+        limit: int = Option(100, "--limit", "-l", help="限制删除数量"),
     ):
         """按正则表达式批量删除标签
 
@@ -145,7 +146,7 @@ def register(app: typer.Typer):
                 failed_count += 1
 
         # 输出统计
-        print(f"\n删除结果:")
+        print("\n删除结果:")
         print(f"  匹配: {len(matched_tags)}")
         print(f"  成功: {success_count}")
         print(f"  失败: {failed_count}")
@@ -155,8 +156,7 @@ def register(app: typer.Typer):
 
     @app.command(name="list-delete")
     def list_delete(
-        pattern: str = ".*",
-        limit: int = Option(20, "--limit", "-l", help="限制显示数量")
+        pattern: str = ".*", limit: int = Option(20, "--limit", "-l", help="限制显示数量")
     ):
         """列出可删除的标签（用于预览）
 
@@ -189,5 +189,8 @@ def register(app: typer.Typer):
         for i, tag in enumerate(matched_tags, 1):
             print(f"  {i}. {tag}")
 
-        if len(matched_tags) == limit and len([tag for tag in all_tags if regex.match(tag)]) > limit:
-            print(f"  ... 还有更多标签（使用 --limit 增加显示数量）")
+        if (
+            len(matched_tags) == limit
+            and len([tag for tag in all_tags if regex.match(tag)]) > limit
+        ):
+            print("  ... 还有更多标签（使用 --limit 增加显示数量）")

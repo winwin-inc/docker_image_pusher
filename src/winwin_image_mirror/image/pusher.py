@@ -2,6 +2,7 @@
 
 提供镜像推送功能。
 """
+
 import logging
 import subprocess
 

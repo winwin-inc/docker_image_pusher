@@ -2,6 +2,7 @@
 
 实现使用浏览器批量删除标签的功能。
 """
+
 import os
 import sys
 
@@ -24,7 +25,7 @@ def register(app: typer.Typer):
         dry_run: bool = Option(False, "--dry-run", help="预览模式，不实际删除"),
         force: bool = Option(False, "--force", help="跳过确认提示"),
         show_browser: bool = Option(False, "--show-browser", help="显示浏览器窗口"),
-        delay: float = Option(2.0, "--delay", help="操作之间的延迟时间(秒)")
+        delay: float = Option(2.0, "--delay", help="操作之间的延迟时间(秒)"),
     ):
         """使用浏览器自动化批量删除标签
 
@@ -43,10 +44,7 @@ def register(app: typer.Typer):
         if not dry_run and not force:
             typer.confirm(f"确认使用浏览器删除以下 {len(tag_list)} 个标签?", abort=True)
 
-        storage_state_path = os.getenv(
-            "ALIYUN_STATE_PATH",
-            "data/aliyun_state.json"
-        )
+        storage_state_path = os.getenv("ALIYUN_STATE_PATH", "data/aliyun_state.json")
 
         # 预览模式
         if dry_run:
@@ -59,9 +57,7 @@ def register(app: typer.Typer):
 
         # 创建删除器并执行删除
         with AliyunBrowserDeleter(
-            storage_state_path=storage_state_path,
-            headless=not show_browser,
-            delay=delay
+            storage_state_path=storage_state_path, headless=not show_browser, delay=delay
         ) as deleter:
             results = deleter.delete_batch_tags(tag_list)
 
@@ -69,7 +65,7 @@ def register(app: typer.Typer):
             success_count = sum(1 for v in results.values() if v)
             failed_count = len(results) - success_count
 
-            print(f"\n删除结果:")
+            print("\n删除结果:")
             print(f"  成功: {success_count}")
             print(f"  失败: {failed_count}")
 

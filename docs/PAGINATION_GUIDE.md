@@ -89,8 +89,8 @@ uv run cli.py delete-browser-single update-cert-20251010 --show-browser
 如果您知道 tag 可能在更后面的页面,可以增加查找页数:
 
 ```python
-# 修改 browser_deleter.py
-from browser_deleter import AliyunBrowserDeleter
+# 修改 src/winwin_image_mirror/browser/deleter.py
+from src.winwin_image_mirror.browser.deleter import AliyunBrowserDeleter
 
 with AliyunBrowserDeleter() as deleter:
     deleter.delete_single_tag('my-tag', max_pages=50)  # 查找 50 页

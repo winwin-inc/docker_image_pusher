@@ -1,16 +1,15 @@
-"""Docker Image Pusher - 主入口
+"""WinWin Image Mirror - 主入口
 
 提供命令行接口，将国外 Docker 镜像转存到阿里云私有仓库。
 """
-from dotenv import load_dotenv
-
-load_dotenv()
 
 import typer
+from dotenv import load_dotenv
 
-from .commands import list, push, delete_api
-from .commands.delete_browser import login, single, batch, regex
+from .commands import delete_api, list, push
+from .commands.delete_browser import batch, login, regex, single
 
+load_dotenv()
 # 创建 Typer 应用
 app = typer.Typer()
 
