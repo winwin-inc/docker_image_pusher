@@ -3,6 +3,8 @@
 提供命令行接口，将国外 Docker 镜像转存到阿里云私有仓库。
 """
 
+import logging
+
 import typer
 from dotenv import load_dotenv
 
@@ -10,6 +12,11 @@ from .commands import list, push
 from .commands.delete import register as delete_register
 
 load_dotenv()
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(message)s",
+)
 
 app = typer.Typer()
 
