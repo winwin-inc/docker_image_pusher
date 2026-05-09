@@ -11,6 +11,8 @@ env:
   ALIYUN_NAME_SPACE: "${{ secrets.ALIYUN_NAME_SPACE }}"
   ALIYUN_REGISTRY_USER: "${{ secrets.ALIYUN_REGISTRY_USER }}"
   ALIYUN_REGISTRY_PASSWORD: "${{ secrets.ALIYUN_REGISTRY_PASSWORD }}"
+  DHI_REGISTRY_USER: "${{ secrets.DHI_REGISTRY_USER }}"
+  DHI_REGISTRY_PASSWORD: "${{ secrets.DHI_REGISTRY_PASSWORD }}"
 
 jobs:
 
@@ -63,5 +65,6 @@ jobs:
 
     - name: Build and push image Aliyun
       run: |
+        docker login -u $DHI_REGISTRY_USER -p $DHI_REGISTRY_PASSWORD dhi.io
         docker login -u $ALIYUN_REGISTRY_USER -p $ALIYUN_REGISTRY_PASSWORD $ALIYUN_REGISTRY
         uv run cli push

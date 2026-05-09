@@ -138,3 +138,4 @@
 - name: flink:1.20.3-scala_2.12-java11
 - name: maven:3.9-eclipse-temurin-11-alpine
 - name: apache/airflow:3.2.0
+- name: dhi.io/kubectl:1.35.4
