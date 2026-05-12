@@ -24,4 +24,5 @@ def register(app: typer.Typer):
         namespace = Config.get_namespace()
 
         for tag in tags:
-            print(f"{registry}/{namespace}:{tag}")
+            vpc_registry = registry.replace("registry.", "registry-vpc.")
+            print(f"{vpc_registry}/{namespace}:{tag}")
