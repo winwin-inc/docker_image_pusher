@@ -151,3 +151,4 @@
 - name: quay.io/prometheus/statsd-exporter:v0.29.0
 - name: nousresearch/hermes-agent:main
 - name: curlimages/curl:8.9.1
+- name: codeberg.org/forgejo/forgejo:15
