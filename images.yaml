@@ -154,3 +154,4 @@
 - name: curlimages/curl:8.9.1
 - name: codeberg.org/forgejo/forgejo:15
 - name: calciumion/new-api:v1.0.0-rc.15
+- name: composer:2.10.1
