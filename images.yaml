@@ -178,3 +178,5 @@
 - name: zilliz/attu:v2.4.7
 - name: zookeeper
 - name: ghcr.io/hound-search/hound:latest
+- name: kennethreitz/httpbin
+
