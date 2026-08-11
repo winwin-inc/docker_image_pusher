@@ -131,7 +131,7 @@
 - name: node:20-slim
 - name: node:14-bullseye-slim
 - name: nousresearch/hermes-agent:main
-- name: nousresearch/hermes-agent:v2026.7.20
+- name: nousresearch/hermes-agent:v2026.8.3
 - name: opensearchproject/opensearch:2.7.0
 - name: otel/opentelemetry-collector-contrib:0.137.0
 - name: postgres:16
