@@ -96,6 +96,7 @@
 - name: hashicorp/vault-secrets-operator:1.4.1
 - name: hashicorp/vault-secrets-operator
 - name: isindir/sops-secrets-operator:0.16.0
+- name: quay.io/isindir/sops-secrets-operator:0.21.2
 - name: jaegertracing/jaeger:2.4.0
 - name: jenkins/inbound-agent:3383.vc8881d4b_0e76-1
 - name: jenkins/jenkins:2.541.3-jdk21
