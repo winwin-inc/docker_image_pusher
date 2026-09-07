@@ -170,3 +170,4 @@
 - name: ghcr.io/hound-search/hound:latest
 - name: kennethreitz/httpbin
 - name: snowdreamtech/frps:0.71.0-alpine
+- name: apache/superset:6.1.0
