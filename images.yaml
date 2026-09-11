@@ -53,6 +53,8 @@
 - name: eclipse-temurin:17-jre-alpine
 - name: eclipse-temurin:8-jre-alpine
 - name: eclipse-temurin:17-jdk-alpine
+- name: eclipse-temurin:21-jre-alpine
+- name: eclipse-temurin:21-jdk-alpine
 - name: flink:1.20.3-scala_2.12-java11
 - name: fluent/fluent-bit:4.0.3
 - name: freeipa/freeipa-server:rocky-9-4.12.2
