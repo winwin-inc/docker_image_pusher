@@ -173,3 +173,5 @@
 - name: kennethreitz/httpbin
 - name: snowdreamtech/frps:0.71.0-alpine
 - name: apache/superset:6.1.0
+- name: cubejs/cube:v0.33.33
+- name: cubejs/cubestore:v0.33.36
